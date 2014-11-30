@@ -1,0 +1,2 @@
+/Users/pentiumx/Projects/caffe/examples/images/cat.jpg 0
+/Users/pentiumx/Projects/caffe/examples/images/fish-bike.jpg 0
