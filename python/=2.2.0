@@ -1,0 +1,7 @@
+Downloading/unpacking h5py
+Installing collected packages: h5py
+  Found existing installation: h5py 2.3.1
+    Uninstalling h5py:
+      Successfully uninstalled h5py
+Successfully installed h5py
+Cleaning up...
