@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 
 # Make sure that caffe is on the python path:
 #caffe_root = '../'  # this file is expected to be in {caffe_root}/examples
-caffe_root = '/Users/pentiumx/Projects/caffe/'
+caffe_root = '/home/ispick/Projects/caffe/'
 import sys
 sys.path.insert(0, caffe_root + 'python')
 
@@ -33,12 +33,13 @@ plt.rcParams['image.cmap'] = 'gray'
 
 #net = caffe.Classifier(caffe_root + 'models/bvlc_reference_caffenet/deploy.prototxt',
 #                       caffe_root + 'models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel')
-net = caffe.Classifier(caffe_root + 'models/bvlc_reference_caffenet/deploy.prototxt',
-                       caffe_root + 'models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel')
+net = caffe.Classifier(caffe_root + 'models/ispick/deploy.prototxt',
+                       caffe_root + 'models/ispick/caffenet_train_iter_10000.caffemodel')
 net.set_phase_test()
 net.set_mode_cpu()
 # input preprocessing: 'data' is the name of the input blob == net.inputs[0]
-net.set_mean('data', np.load(caffe_root + 'python/caffe/imagenet/ilsvrc_2012_mean.npy'))  # ImageNet mean
+#net.set_mean('data', np.load(caffe_root + 'python/caffe/imagenet/ilsvrc_2012_mean.npy'))  # ImageNet mean
+net.set_mean('data', np.load(caffe_root + 'data/ispick/imagenet_mean.npy'))  # ImageNet mean
 net.set_raw_scale('data', 255)  # the reference model operates on images in [0,255] range instead of [0,1]
 net.set_channel_swap('data', (2,1,0))  # the reference model has channels in BGR order instead of RGB
 
@@ -47,8 +48,8 @@ net.set_channel_swap('data', (2,1,0))  # the reference model has channels in BGR
 
 # In[3]:
 
-scores = net.predict([caffe.io.load_image(caffe_root + 'examples/images/cat.jpg')])
-
+#scores = net.predict([caffe.io.load_image(caffe_root + 'examples/images/cat.jpg')])
+scores = net.predict([caffe.io.load_image(caffe_root + 'data/ispick/sayaka.jpg')])
 
 # The layer features and their shapes (10 is the batch size, corresponding to the the ten subcrops used by Krizhevsky et al.)
 
