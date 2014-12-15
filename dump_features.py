@@ -5,25 +5,40 @@ import sys
 import caffe
 from caffe.io import caffe_pb2
 import time
+import json
 
-print(sys.argv[1:][0])
-dirname = sys.argv[1:][0]
-''''''
-db = leveldb.LevelDB(dirname)
-print type(db.RangeIter())
-
-cnt=0
-for key, val in db.RangeIter():
-  datum = caffe.io.caffe_pb2.Datum()
-  datum.ParseFromString(val)
-  arr = caffe.io.datum_to_array(datum)
+def debug_print (arr):
   print arr
   print arr.size
   for item in arr[0]:
     print item[0]
-  cnt+=1
-  break
 
+print(sys.argv[1:][0])
+dirname = sys.argv[1:][0]
+db = leveldb.LevelDB(dirname)
+print type(db.RangeIter())
+
+
+cnt=0
+f = open(dirname + '/feature_values', 'w')
+for key, val in db.RangeIter():
+  # Get extracted features as a numpy list
+  datum = caffe.io.caffe_pb2.Datum()
+  datum.ParseFromString(val)
+  features  = caffe.io.datum_to_array(datum)
+
+  # Change the formats
+  features = map(str, features)
+
+  # Append it to the file
+  print key
+  line = { 'filename':key, 'value':','.join(features) }
+  print line
+  f.write(json.dumps(line, ensure_ascii=False) + '\n')
+  cnt+=1
+
+f.close()
+print 'cnt:' + str(cnt)
 '''h = leveldb.LevelDB(dirname)
 datum = caffe_pb2.Datum()
 for key_val,ser_str in h.RangeIter():
@@ -38,4 +53,3 @@ for key_val,ser_str in h.RangeIter():
   print "\nKey val: ", key_val
   print "Image: ", img
 '''
-print cnt
