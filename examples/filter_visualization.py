@@ -33,8 +33,10 @@ plt.rcParams['image.cmap'] = 'gray'
 
 #net = caffe.Classifier(caffe_root + 'models/bvlc_reference_caffenet/deploy.prototxt',
 #                       caffe_root + 'models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel')
+#net = caffe.Classifier(caffe_root + 'models/ispick/deploy.prototxt',
+#                       caffe_root + 'models/ispick/caffenet_train_pmmm350_iter_4000.caffemodel')
 net = caffe.Classifier(caffe_root + 'models/ispick/deploy.prototxt',
-                       caffe_root + 'models/ispick/caffenet_train_pmmm350_iter_4000.caffemodel')
+                       caffe_root + 'models/ispick/caffenet_train_iter_20000.caffemodel')
 #net = caffe.Classifier(caffe_root + 'examples/cifar10/cifar10_quick.prototxt',
 #                       caffe_root + 'examples/cifar10/cifar10_quick_iter_5000.caffemodel')
 net.set_phase_test()
@@ -42,7 +44,7 @@ net.set_mode_cpu()
 # input preprocessing: 'data' is the name of the input blob == net.inputs[0]
 #net.set_mean('data', np.load(caffe_root + 'python/caffe/imagenet/ilsvrc_2012_mean.npy'))  # ImageNet mean
 #net.set_mean('data', np.load(caffe_root + 'data/ispick/imagenet_mean.npy'))  # ImageNet mean
-net.set_mean('data', np.load(caffe_root + 'data/ispick/pmmm350_mean.npy'))  # ImageNet mean
+net.set_mean('data', np.load(caffe_root + 'data/ispick/anipic_singles_mean.npy'))  # ImageNet mean
 
 net.set_raw_scale('data', 255)  # the reference model operates on images in [0,255] range instead of [0,1]
 net.set_channel_swap('data', (2,1,0))  # the reference model has channels in BGR order instead of RGB

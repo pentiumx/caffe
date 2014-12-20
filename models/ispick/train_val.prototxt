@@ -5,14 +5,14 @@ layers {
   top: "data"
   top: "label"
   data_param {
-    source: "data/ispick/train_db"
+    source: "data/ispick/train_db_anipic_singles"
     backend: LMDB
-    batch_size: 256
+    batch_size: 128#256
   }
   transform_param {
     #crop_size: 227
-    crop_size: 227
-    mean_file: "data/ispick/imagenet_mean.binaryproto"
+    crop_size: 114
+    mean_file: "data/ispick/imagenet_mean_anipic_singles.binaryproto"
     mirror: true
   }
   include: { phase: TRAIN }
@@ -23,13 +23,13 @@ layers {
   top: "data"
   top: "label"
   data_param {
-    source: "data/ispick/train_db"
+    source: "data/ispick/train_db_anipic_singles"
     backend: LMDB
     batch_size: 50
   }
   transform_param {
-    crop_size: 227
-    mean_file: "data/ispick/imagenet_mean.binaryproto"
+    crop_size: 114#227
+    mean_file: "data/ispick/imagenet_mean_anipic_singles.binaryproto"
     mirror: false
   }
   include: { phase: TEST }
