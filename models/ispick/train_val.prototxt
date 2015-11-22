@@ -1,6 +1,7 @@
 name: "CaffeNet"
 layers {
   name: "data"
+<<<<<<< HEAD
   type: IMAGE_DATA
   top: "data"
   top: "label"
@@ -13,12 +14,27 @@ layers {
   transform_param {
     crop_size: 227
     mean_file: "data/ispick/imagenet_mean_illust.binaryproto"
+=======
+  type: DATA
+  top: "data"
+  top: "label"
+  data_param {
+    source: "data/ispick/train_db_anipic_singles"
+    backend: LMDB
+    batch_size: 128#256
+  }
+  transform_param {
+    #crop_size: 227
+    crop_size: 114
+    mean_file: "data/ispick/imagenet_mean_anipic_singles.binaryproto"
+>>>>>>> b24babaf57fb3b3d433ab49131b806f622896a37
     mirror: true
   }
   include: { phase: TRAIN }
 }
 layers {
   name: "data"
+<<<<<<< HEAD
   type: IMAGE_DATA
   top: "data"
   top: "label"
@@ -36,6 +52,19 @@ layers {
   transform_param {
     crop_size: 227
     mean_file: "data/ispick/imagenet_mean_illust.binaryproto"
+=======
+  type: DATA
+  top: "data"
+  top: "label"
+  data_param {
+    source: "data/ispick/train_db_anipic_singles"
+    backend: LMDB
+    batch_size: 50
+  }
+  transform_param {
+    crop_size: 114#227
+    mean_file: "data/ispick/imagenet_mean_anipic_singles.binaryproto"
+>>>>>>> b24babaf57fb3b3d433ab49131b806f622896a37
     mirror: false
   }
   include: { phase: TEST }
